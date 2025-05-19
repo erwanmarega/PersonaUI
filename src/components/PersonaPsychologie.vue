@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
     <div class="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-4">
       <div class="w-full max-w-sm bg-[#111] border border-[#2a2a2a] rounded-2xl px-6 py-8 shadow-lg text-white">
         <h2 class="text-xl font-bold text-center mb-1">Psychologie utilisateur</h2>
@@ -75,6 +76,7 @@
   <script setup>
   defineProps(['formData'])
   defineEmits(['next', 'prev'])
+  import Navbar from './Navbar.vue';
   </script>
   
   <style scoped>

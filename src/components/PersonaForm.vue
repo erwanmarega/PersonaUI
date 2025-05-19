@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
     <div class="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-4">
       <div class="w-full max-w-sm bg-[#111] border border-[#2a2a2a] rounded-2xl px-6 py-8 shadow-lg relative">
         <h2 class="text-2xl font-bold text-white text-center mb-2">Créez un persona</h2>
@@ -60,6 +61,7 @@
   <script setup>
   defineProps(['formData'])
   defineEmits(['next'])
+  import Navbar from './Navbar.vue';
   </script>
   
   <style scoped>
