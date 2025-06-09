@@ -8,13 +8,11 @@
         opacity: opacity
       }"
     >
-      <!-- Minimal neon ring -->
       <div
         class="w-full h-full rounded-full border-2 border-[#40c9ff]"
         style="box-shadow: 0 0 8px rgba(64, 201, 255, 0.4), 0 0 20px rgba(232, 28, 255, 0.2);"
       ></div>
   
-      <!-- Simplified particle trail -->
       <div
         v-for="particle in particles"
         :key="particle.id"

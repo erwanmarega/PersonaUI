@@ -7,4 +7,5 @@
 
 <script setup>
 import CustomCursor from './components/CustomCursor.vue'
+
 </script>
