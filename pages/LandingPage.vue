@@ -4,11 +4,10 @@
       <Navbar />
 
       <div class="text-center max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[100vh] 
-  mt-[22rem] sm:mt-[8rem] md:mt-[12rem] lg:mt-[16rem] 
-  pt-[22rem] sm:pt-64 md:pt-72 lg:pt-80">
+        mt-[22rem] sm:mt-[8rem] md:mt-[12rem] lg:mt-[16rem] 
+        pt-[22rem] sm:pt-64 md:pt-72 lg:pt-80">
 
-
-        <p class="text-xs sm:text-sm bg-[#2a2a2a] border border-[#414141] text-[#e81cff] px-4 py-2 rounded-full inline-block mb-6">
+        <p class="text-xs sm:text-sm bg-[#2a2a2a] border border-[#414141] text-[#fffff] px-4 py-2 rounded-full inline-block mb-6">
           🚀 Générez vos personas en quelques clics
         </p>
         <h1 class="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight mb-6">
