@@ -11,7 +11,7 @@
       <a href="#features" class="text-[#717171] hover:text-[#e81cff] transition">Fonctionnalités</a>
       <a href="#about" class="text-[#717171] hover:text-[#e81cff] transition">À propos</a>
       <router-link
-        to="/form"
+        to="/login"
         class="px-5 py-2 bg-[#313131] text-[#717171] rounded-full hover:bg-[#e81cff] hover:text-white transition shadow-md"
       >
         Commencer
