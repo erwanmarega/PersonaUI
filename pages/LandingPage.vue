@@ -11,7 +11,7 @@
           🚀 Générez vos personas en quelques clics
         </p>
         <h1 class="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-          Créez des Personas UX propulsés par l'IA
+          Créez des Personas propulsés par l'IA
         </h1>
         <p class="text-base sm:text-lg md:text-xl mb-10 font-light max-w-xl mx-auto">
           PersonaUI vous aide à concevoir des personas clairs, convaincants et exportables en PDF, pour améliorer vos projets UX sans prise de tête.
@@ -129,3 +129,4 @@ body {
   min-height: 100vh;
 }
 </style>
+  
