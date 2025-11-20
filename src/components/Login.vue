@@ -1,5 +1,6 @@
 <template>
-  <div class=" ml-2 mt-4">
+  <div class="min-h-screen bg-black px-4 py-20 flex items-center justify-center relative">
+    <div class="absolute top-4 left-4">
         <router-link to="/" class="text-[#717171] hover:text-[#e81cff] transition inline-flex items-center gap-2">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -7,7 +8,6 @@
           Retour à l'accueil
         </router-link>
   </div>
-  <div class="min-h-screen bg-black flex items-center justify-center px-4 py-20">
     <div class="login-container w-full max-w-md">
       <div class="bg-[#0a0a0a] border border-[#1e1e1e] rounded-2xl p-8 shadow-2xl">
         <form @submit.prevent="handleLogin">
@@ -105,7 +105,7 @@
         <div class="text-center mt-6">
           <p class="text-[#717171]">
             Pas encore de compte ?
-            <router-link to="/register" class="text-[#e81cff] hover:underline font-medium">
+            <router-link to="/signup" class="text-[#e81cff] hover:underline font-medium">
               Créer un compte
             </router-link>
           </p>
@@ -116,8 +116,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios'
 
 const router = useRouter();
 
@@ -125,20 +126,37 @@ const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
 const rememberMe = ref(false);
+const loading = ref(false)
+const error = ref(false)
 
-const handleLogin = () => {
-  console.log('Login:', {
+const handleLogin = async () => {
+loading.value = true
+error.value
+
+try {
+  const response = await axios.post('http://localhost:5000/api/users/login', {
     email: email.value,
-    password: password.value,
-    rememberMe: rememberMe.value
-  });
+    password: password.value
+  })
+   if (response.data.token) {
+      localStorage.setItem('token', response.data.token);
+    }
 
-  router.push('/form');
+    router.push('/form');
+}
+catch (err) {
+ error.value = err.response?.data?.message || 'Une erreur est survenue';
+ console.error('Erreur de connexion', err);
+} finally {
+loading.value = false;
+}
 };
 
 const handleGoogleLogin = () => {
   console.log('Google login');
 };
+
+
 </script>
 
 <style scoped>

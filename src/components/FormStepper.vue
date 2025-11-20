@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="px-4 bg-[#0a0a0a]">
+    <div class="px-4">
       <burger-menu/>
     </div>
-    <div v-if="step === 1 && !personaResult" class="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-4">
+    <div v-if="step === 1 && !personaResult" class="min-h-screen flex items-center justify-center bg-black px-4">
       <div class="w-full max-w-sm bg-[#111] border border-[#2a2a2a] rounded-2xl px-6 py-8 shadow-lg relative">
         <h2 class="text-2xl font-bold text-white text-center mb-2">Créez un persona avec l'IA</h2>
         <p class="text-sm text-[#888] text-center mb-6">

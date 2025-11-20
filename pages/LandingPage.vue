@@ -3,8 +3,8 @@
     <section class="bg-transparent text-white px-4 sm:px-6 py-16 space-y-16">
       <Navbar />
 
-      <div class="text-center max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[100vh] 
-        mt-[22rem] sm:mt-[8rem] md:mt-[12rem] lg:mt-[16rem] 
+      <div class="text-center max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[100vh]
+        mt-[22rem] sm:mt-[8rem] md:mt-[12rem] lg:mt-[16rem]
         pt-[22rem] sm:pt-64 md:pt-72 lg:pt-80">
 
         <p class="text-xs sm:text-sm bg-[#2a2a2a] border border-[#414141] text-[#fffff] px-4 py-2 rounded-full inline-block mb-6">
@@ -14,7 +14,7 @@
           Créez des Personas propulsés par l'IA
         </h1>
         <p class="text-base sm:text-lg md:text-xl mb-10 font-light max-w-xl mx-auto">
-          PersonaUI vous aide à concevoir des personas clairs, convaincants et exportables en PDF, pour améliorer vos projets UX sans prise de tête.
+          PersonaUI vous aide à concevoir des personas clairs, convaincants et exportables en SVG , pour améliorer vos projets UX sans prise de tête.
         </p>
         <router-link
           to="/form"
@@ -54,7 +54,7 @@
 
       <div class="text-center">
         <router-link
-          to="/form"
+          to="/login"
           class="inline-block px-8 sm:px-10 py-4 mt-12 rounded-full font-semibold text-base bg-white text-black hover:bg-[#e81cff] hover:text-white transition"
         >
           Commencer maintenant →
@@ -129,4 +129,3 @@ body {
   min-height: 100vh;
 }
 </style>
-  

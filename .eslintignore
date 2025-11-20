@@ -1,0 +1,11 @@
+node_modules
+dist
+.vite
+*.config.js
+*.config.cjs
+.nuxt
+.output
+.cache
+coverage
+public
+calendar-intelligent

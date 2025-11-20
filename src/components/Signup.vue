@@ -1,5 +1,6 @@
 <template>
-  <div class=" ml-2 mt-4">
+  <div class="min-h-screen bg-black px-4 py-20 flex items-center justify-center relative">
+    <div class="absolute top-4 left-4">
         <router-link to="/" class="text-[#717171] hover:text-[#e81cff] transition inline-flex items-center gap-2">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -7,12 +8,11 @@
           Retour à l'accueil
         </router-link>
   </div>
-  <div class="min-h-screen bg-black flex items-center justify-center px-4 py-20">
     <div class="login-container w-full max-w-md">
       <div class="bg-[#0a0a0a] border border-[#1e1e1e] rounded-2xl p-8 shadow-2xl">
         <form @submit.prevent="handleLogin">
             <div>
-                <H1 class="text-white text-2xl font-bold mb-4">Login</H1>
+                <H1 class="text-white text-2xl font-bold mb-4">Signup</H1>
             </div>
           <div class="mb-6">
             <label for="email" class="block text-sm font-medium text-[#717171] mb-2">
@@ -75,7 +75,7 @@
             type="submit"
             class="w-full py-3 bg-[#131313] text-white font-semibold rounded-lg hover:bg-[#1a1a1a] hover:border-[#e81cff] transition-all duration-300"
           >
-            Se connecter
+            S'inscrire
           </button>
         </form>
 
@@ -104,9 +104,9 @@
 
         <div class="text-center mt-6">
           <p class="text-[#717171]">
-            Pas encore de compte ?
-            <router-link to="/register" class="text-[#e81cff] hover:underline font-medium">
-              Créer un compte
+            Vous avez un compte ?
+            <router-link to="/login" class="text-[#e81cff] hover:underline font-medium">
+              Connectez-vous
             </router-link>
           </p>
         </div>
