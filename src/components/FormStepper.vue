@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="px-4">
-      <burger-menu/>
+      <burger-menu :menuItems="menuItems"/>
     </div>
     <div v-if="step === 1 && !personaResult" class="min-h-screen flex items-center justify-center bg-black px-4">
       <div class="w-full max-w-sm bg-[#111] border border-[#2a2a2a] rounded-2xl px-6 py-8 shadow-lg relative">
@@ -215,12 +215,31 @@
 <script setup>
 import { reactive, ref, computed, watch } from 'vue'
 import apiService from '../services/api.js'
+import authService from '../services/authService.js'
 import BurgerMenu from './BurgerMenu.vue'
 
 const step = ref(1)
 const isLoading = ref(false)
 const isGeneratingTemplate = ref(false)
 const error = ref(null)
+
+const menuItems = [
+  {
+    label: 'Accueil',
+    url: '/',
+    icon: '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>'
+  },
+  {
+    label: 'Créer un persona',
+    url: '/form',
+    icon: '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>'
+  },
+  {
+    label: 'Mes personas',
+    url: '/saved-personas',
+    icon: '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>'
+  }
+]
 
 const criteria = reactive({
   projectType: '',
@@ -267,9 +286,53 @@ async function handleGenerate() {
   }
 }
 
-function savePersona() {
-  console.log('💾 Sauvegarde du persona:', editablePersona.value)
-  alert('Persona sauvegardé ! (Fonctionnalité à implémenter)')
+async function savePersona() {
+  // Vérifier que l'utilisateur est connecté
+  if (!authService.isAuthenticated()) {
+    error.value = 'Vous devez être connecté pour sauvegarder un persona'
+    setTimeout(() => {
+      window.location.href = '/login'
+    }, 2000)
+    return
+  }
+
+  isLoading.value = true
+  error.value = null
+
+  try {
+    // Debug: voir les données du persona
+    console.log('💾 editablePersona.value:', editablePersona.value)
+
+    // Préparer les données du persona pour la sauvegarde
+    const personaData = {
+      name: editablePersona.value.nom || 'Persona sans nom',
+      description: `${editablePersona.value.profession || 'Profession inconnue'} - ${editablePersona.value.age || 'N/A'} ans`,
+      tone: editablePersona.value.niveauTechnique || '',
+      style: editablePersona.value.appareilPrefere || '',
+      context: editablePersona.value.contexteUtilisation || '',
+      keywords: [
+        editablePersona.value.profession,
+        editablePersona.value.appareilPrefere,
+        editablePersona.value.niveauTechnique
+      ].filter(Boolean)
+    }
+
+    console.log('📤 Données à envoyer:', personaData)
+
+    const result = await apiService.savePersona(personaData)
+
+    if (result.success) {
+      alert('✅ Persona sauvegardé avec succès !')
+      console.log('💾 Persona sauvegardé:', result.data)
+    } else {
+      error.value = result.error || 'Erreur lors de la sauvegarde'
+    }
+  } catch (err) {
+    console.error('Erreur lors de la sauvegarde:', err)
+    error.value = err.message || 'Impossible de sauvegarder le persona. Vérifiez votre connexion.'
+  } finally {
+    isLoading.value = false
+  }
 }
 
 function resetForm() {

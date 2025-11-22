@@ -10,7 +10,7 @@
   </div>
     <div class="login-container w-full max-w-md">
       <div class="bg-[#0a0a0a] border border-[#1e1e1e] rounded-2xl p-8 shadow-2xl">
-        <form @submit.prevent="handleLogin">
+        <form @submit.prevent="handleSignup">
             <div>
                 <H1 class="text-white text-2xl font-bold mb-4">Signup</H1>
             </div>
@@ -126,7 +126,7 @@ const password = ref('');
 const showPassword = ref(false);
 const rememberMe = ref(false);
 
-const handleLogin = () => {
+const handleSignup = () => {
   console.log('Login:', {
     email: email.value,
     password: password.value,

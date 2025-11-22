@@ -1,3 +1,5 @@
+import authService from './authService.js'
+
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
 /**
@@ -20,6 +22,13 @@ class ApiService {
       },
       ...options,
     }
+
+    console.log('🌐 API Request:', {
+      url,
+      method: config.method || 'GET',
+      headers: config.headers,
+      body: config.body
+    })
 
     try {
       const response = await fetch(url, config)
@@ -93,6 +102,81 @@ class ApiService {
   async healthCheck() {
     return this.request('/api/persona/health', {
       method: 'GET',
+    })
+  }
+
+  // ==================== Gestion des personas sauvegardés ====================
+
+  /**
+   * Récupérer tous les personas sauvegardés de l'utilisateur
+   * @returns {Promise<Object>}
+   */
+  async getSavedPersonas() {
+    return this.request('/api/save-persona', {
+      method: 'GET',
+      headers: authService.getAuthHeaders(),
+    })
+  }
+
+  /**
+   * Récupérer un persona sauvegardé spécifique
+   * @param {string} id - L'ID du persona
+   * @returns {Promise<Object>}
+   */
+  async getSavedPersonaById(id) {
+    return this.request(`/api/save-persona/${id}`, {
+      method: 'GET',
+      headers: authService.getAuthHeaders(),
+    })
+  }
+
+  /**
+   * Récupérer tous les personas actifs
+   * @returns {Promise<Object>}
+   */
+  async getActivePersonas() {
+    return this.request('/api/save-persona/active/all', {
+      method: 'GET',
+      headers: authService.getAuthHeaders(),
+    })
+  }
+
+  /**
+   * Créer/Sauvegarder un nouveau persona
+   * @param {Object} personaData - Les données du persona
+   * @returns {Promise<Object>}
+   */
+  async savePersona(personaData) {
+    return this.request('/api/save-persona', {
+      method: 'POST',
+      headers: authService.getAuthHeaders(),
+      body: JSON.stringify(personaData),
+    })
+  }
+
+  /**
+   * Mettre à jour un persona existant
+   * @param {string} id - L'ID du persona
+   * @param {Object} personaData - Les nouvelles données
+   * @returns {Promise<Object>}
+   */
+  async updateSavedPersona(id, personaData) {
+    return this.request(`/api/save-persona/${id}`, {
+      method: 'PUT',
+      headers: authService.getAuthHeaders(),
+      body: JSON.stringify(personaData),
+    })
+  }
+
+  /**
+   * Supprimer un persona sauvegardé
+   * @param {string} id - L'ID du persona
+   * @returns {Promise<Object>}
+   */
+  async deleteSavedPersona(id) {
+    return this.request(`/api/save-persona/${id}`, {
+      method: 'DELETE',
+      headers: authService.getAuthHeaders(),
     })
   }
 }
